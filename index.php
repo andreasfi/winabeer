@@ -3,7 +3,7 @@ session_start();
 $session_name = 'sec_session_'.$_SERVER['REMOTE_ADDR'];   // Set a custom session name
 $secure = 'SECURE'; // This stops JavaScript being able to access the session id.
 $httponly = true; // Forces sessions to only use cookies.
-$clientIp = $_SERVER['REMOTE_ADDR'];
+$clientIp = get_client_ip();
 $alreadyused = false;
 $count = 0;
 // Function to get the client IP address
@@ -67,7 +67,7 @@ if($alreadyused == false) {
 	
 		$stmt->bindParam(':usedip', $clientIp);
 		$stmt->bindParam(':counter', $count);
-		//$stmt->execute();
+		//	$stmt->execute();
 	} catch( PDOException $Exception ) { // Gestion des erreurs
 		// Affichage de l'erreur PDO
 		echo $Exception->getMessage();
